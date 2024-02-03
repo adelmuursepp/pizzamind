@@ -1,31 +1,31 @@
-.dashboard {
+.welcomepage {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
+  /* justify-content: center; */
   height: 100vh; /* Use the full screen height */
-  /* padding: 20px; */
+  padding: 40px 0;
   box-sizing: border-box;
+  background-color: #8bc8d4;
 }
-.user-info {
-  padding-top: 5vh;
+.welcome-info {
+  padding-top: 15vh;
+  padding-bottom: 10vh;
   /* height: 10vh; */
   text-align: center;
+  color: white;
 }
 
-.soon-expiring {
-  background-color: #8bc8d4;
-  height: 30vh;
-}
-
-.data-visualization {
-  height: 30vh;
-}
-
-.user-info h2 {
+.welcome-info h2 {
   margin: 0;
-  font-size: 24px;
-
+  font-size: 40px;
+  text-align: center;
+  color: white;
   font-family: "Pacifico";
+}
+
+.welcome-info .intro-sentence {
+  font-weight: 700;
+  font-size: 23px;
 }
 
 .actions {

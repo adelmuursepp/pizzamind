@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const Camera = ({ onCapture }) => {
+const Camera = () => {
     const videoRef = useRef(null);
     const [stream, setStream] = useState(null);
     const [error, setError] = useState('');
@@ -35,21 +36,41 @@ const Camera = ({ onCapture }) => {
         };
     }, []);
 
-    const captureImage = () => {
+    const { getAccessTokenSilently } = useAuth0();
+
+    const captureImage = async () => {
         if (!stream) return;
 
         const canvas = document.createElement('canvas');
         canvas.width = videoRef.current.videoWidth;
         canvas.height = videoRef.current.videoHeight;
         const context = canvas.getContext('2d');
-
-        // Draw the video frame to the canvas
         context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
 
-        // Convert the canvas to blob and then to a file
-        canvas.toBlob(blob => {
+        canvas.toBlob(async (blob) => {
             const imageFile = new File([blob], "capture.jpg", { type: "image/jpeg" });
-            onCapture(imageFile);
+            // onCapture(imageFile); // This is optional depending on your use case
+
+            const token = await getAccessTokenSilently();
+            const formData = new FormData();
+            formData.append('file', imageFile);
+
+            fetch('/upload', {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Handle response data...
+                })
+                .catch(error => {
+                    console.error('Error uploading file:', error);
+                    // Handle error...
+                });
         }, 'image/jpeg');
     };
 

@@ -1,0 +1,12 @@
+.loading-page {
+  padding: 0;
+  margin: 0;
+  background-color: #8bc8d4;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-page .loading-title {
+  font-size: 30px;
+}
