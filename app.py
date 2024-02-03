@@ -143,7 +143,5 @@ def file_upload():
         else:
             return 'Product not found or API error', 404
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 3000))
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
