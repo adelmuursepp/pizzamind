@@ -37,7 +37,7 @@ const Dashboard = () => {
                     </div>
                     <div className="actions">
                         <button className="action-btn" onClick={() => navigate("/takephoto")}>Scan</button>
-                        <button className="action-btn">Upload Photo</button>
+                        <button className="action-btn" onClick={() => navigate("/upload")}>Upload Photo</button>
                     </div>
                     {/* </div> */}
                     {/* <button onClick={() => logout({ returnTo: "/" })}>

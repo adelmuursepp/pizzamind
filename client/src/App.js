@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FileUpload from './components/FileUpload';
+import FileUploadNOCAM from './components/FileUploadNOCAM';
 import ProductInfoPage from './components/ProductInfoPage';
 import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,6 +37,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/takephoto" element={<ProtectedRoute><FileUpload /></ProtectedRoute>} />
           <Route path="/productinfo" element={<ProductInfoPage />} />
+          <Route path="/upload" element={<FileUploadNOCAM />} />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
