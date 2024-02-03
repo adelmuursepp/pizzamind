@@ -22,11 +22,9 @@ if ENV_FILE:
     load_dotenv(ENV_FILE)
 
 
-uri = "mongodb+srv://adelmuursepp:QHacks2024@cluster0.9xcjq25.mongodb.net/movie-api-db?retryWrites=true&w=majority"
-
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = "mongodb+srv://adelmuursepp:QHacks2024@cluster0.9xcjq25.mongodb.net/movie-api-db?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb+srv://daniel:QHacker2024@pizzamind.bxk8emc.mongodb.net/pizzamind?retryWrites=true&w=majority"
 app.secret_key = env.get("APP_SECRET_KEY")
 mongo = PyMongo(app)
 oauth = OAuth(app)
@@ -41,17 +39,18 @@ oauth.register(
     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration'
 )
 
-@app.route("/login")
-def login():
-    return oauth.auth0.authorize_redirect(
-        redirect_uri=url_for("callback", _external=True)
-    )
-
 @app.route("/callback", methods=["GET", "POST"])
 def callback():
     token = oauth.auth0.authorize_access_token()
     session["user"] = token
     return redirect("/")
+
+
+@app.route("/login")
+def login():
+    return oauth.auth0.authorize_redirect(
+        redirect_uri=url_for("callback", _external=True)
+    )
 
 @app.route("/logout")
 def logout():
@@ -77,30 +76,29 @@ def home():
     else:
         # User is logged in, show the index page
         return render_template("index.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
-    return render_template("index.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
 
 # @app.route('/')
 # def home():
 #     # Access a collection
-#     collection = mongo.db.movies
+#     collection = mongo.db.users
     
 #     # Perform a query
 #     documents = collection.find({})
 #     results = [{k: str(v) for k, v in document.items()} for document in documents]
     
 #     return jsonify(results)
-#     # # Access a collection in the database
-#     # collection = db['movies']
+    # # Access a collection in the database
+    # collection = db['movies']
     
-#     # # Perform a query (retrieve all documents)
-#     # documents = list(collection.find({}))
+    # # Perform a query (retrieve all documents)
+    # documents = list(collection.find({}))
     
-#     # # Convert documents to a list of dicts (if using ObjectId, you need to convert it to string)
-#     # results = [{k: str(v) for k, v in document.items()} for document in documents]
+    # # Convert documents to a list of dicts (if using ObjectId, you need to convert it to string)
+    # results = [{k: str(v) for k, v in document.items()} for document in documents]
     
-#     # return jsonify(results)
-#     # return render_template('index.html')
+    # return jsonify(results)
+    # return render_template('index.html')
 
 @app.route('/scan', methods=['POST'])
 def scan():
@@ -143,7 +141,7 @@ def file_upload():
         else:
             return 'Product not found or API error', 404
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 3000))
-# if __name__ == '__main__':
-#     app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=env.get("PORT", 3000))
+if __name__ == '__main__':
+    app.run(debug=True)
