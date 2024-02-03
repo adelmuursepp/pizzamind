@@ -41,10 +41,10 @@ function FileUpload() {
         <div>
             <h2>Upload a File</h2>
             < Camera />
-            <form onSubmit={handleFileUpload}>
+            {/* <form onSubmit={handleFileUpload}>
                 <input type="file" onChange={handleFileChange} />
                 <button type="submit">Upload</button>
-            </form>
+            </form> */}
         </div>
     );
 }

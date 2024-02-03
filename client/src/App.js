@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FileUpload from './components/FileUpload';
 import ProductInfoPage from './components/ProductInfoPage';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -16,8 +17,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FileUpload />} />
-        <Route path="/productinfo" element={<ProductInfoPage/>} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/takephoto" element={<FileUpload />} />
+        <Route path="/productinfo" element={<ProductInfoPage />} />
       </Routes>
     </BrowserRouter>
   );

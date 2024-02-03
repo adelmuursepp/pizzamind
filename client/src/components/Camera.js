@@ -1,56 +1,68 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const Camera = () => {
+const Camera = ({ onCapture }) => {
     const videoRef = useRef(null);
-    const photoRef = useRef(null);
     const [stream, setStream] = useState(null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // Request access to the camera
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            const constraints = {
-                video: true
-            };
-
-            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+        // Request camera access and start streaming
+        const startVideoStream = async () => {
+            try {
+                const constraints = {
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        frameRate: { ideal: 24 }
+                    }
+                };
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 setStream(stream);
-                if (videoRef.current) {
-                    videoRef.current.srcObject = stream;
-                }
-            }).catch((err) => console.error(err));
-        }
+                if (videoRef.current) videoRef.current.srcObject = stream;
+            } catch (err) {
+                console.error('Error accessing the camera:', err);
+                setError('Unable to access camera: ' + err.message);
+            }
+        };
 
-        // Clean up
+        startVideoStream();
+
+        // Cleanup function to stop the video stream
         return () => {
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
             }
         };
-    }, [stream]);
+    }, []);
 
-    const capturePhoto = () => {
-        const video = videoRef.current;
-        const photo = photoRef.current;
-        const context = photo.getContext('2d');
+    const captureImage = () => {
+        if (!stream) return;
 
-        if (video && photo) {
-            const width = video.videoWidth;
-            const height = video.videoHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = videoRef.current.videoWidth;
+        canvas.height = videoRef.current.videoHeight;
+        const context = canvas.getContext('2d');
 
-            photo.width = width;
-            photo.height = height;
+        // Draw the video frame to the canvas
+        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
 
-            context.drawImage(video, 0, 0, width, height);
-
-            // You can now use photo.toDataURL() to get the image data
-        }
+        // Convert the canvas to blob and then to a file
+        canvas.toBlob(blob => {
+            const imageFile = new File([blob], "capture.jpg", { type: "image/jpeg" });
+            onCapture(imageFile);
+        }, 'image/jpeg');
     };
 
     return (
         <div>
-            <video ref={videoRef} autoPlay playsInline style={{ width: '100%' }}></video>
-            <button onClick={capturePhoto}>Capture Photo</button>
-            <canvas ref={photoRef} style={{ display: 'none' }}></canvas>
+            {error ? (
+                <div>Error: {error}</div>
+            ) : (
+                <>
+                    <video ref={videoRef} autoPlay playsInline style={{ width: '100%' }}></video>
+                    <button onClick={captureImage}>Capture Photo</button>
+                </>
+            )}
         </div>
     );
 };

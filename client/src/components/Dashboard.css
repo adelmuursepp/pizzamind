@@ -1,0 +1,57 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100vh; /* Use the full screen height */
+  /* padding: 20px; */
+  box-sizing: border-box;
+}
+.user-info {
+  padding-top: 5vh;
+  height: 10vh;
+}
+
+.soon-expiring {
+  background-color: #8bc8d4;
+  height: 30vh;
+}
+
+.data-visualization {
+  height: 30vh;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 24px;
+  text-align: center;
+  font-family: "Pacifico";
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Add some space between buttons */
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 24px;
+  background-color: #83d981;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+  .user-info h2 {
+    font-size: 24px;
+  }
+
+  .action-btn {
+    padding: 8px 16px;
+    font-size: 18px;
+  }
+}
