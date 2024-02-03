@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Camera = () => {
     const videoRef = useRef(null);
     const [stream, setStream] = useState(null);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         // Request camera access and start streaming
@@ -65,6 +69,7 @@ const Camera = () => {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
+                    navigate("/productinfo", { state: data });
                     // Handle response data...
                 })
                 .catch(error => {

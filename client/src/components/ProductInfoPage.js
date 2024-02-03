@@ -63,6 +63,7 @@ const ProductDetails = () => {
 
     return (
         <div>
+
             <h1>{product.product_name}</h1>
             <div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
                 <Bar data={chartData} options={options} />
