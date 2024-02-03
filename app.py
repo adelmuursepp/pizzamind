@@ -109,24 +109,46 @@ def token_required(f):
 @token_required
 @app.route('/upload', methods=['POST'])
 def file_upload():
+    UPLOAD_FOLDER = 'uploads'  # Define the folder where you want to save images
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)  # Create the directory if it does not exist
+
     if 'file' not in request.files:
         return jsonify({'message': 'No file part'}), 400
+
     file = request.files['file']
     if file.filename == '':
         return jsonify({'message': 'No selected file'}), 400
+
     if file:
-        print(file)
-        image = Image.open(io.BytesIO(file.read()))
-        barcodes = decode(image)
-        return barcodes
-        # barcode_number = barcodes[0].data.decode("utf-8")
-        response = requests.get(f'https://world.openfoodfacts.org/api/v2/product/{barcode_number}')
-        if response.status_code == 200:
-            product_data = response.json()
-            # You can modify this return statement to display the data as you prefer
-            return jsonify(product_data)
-        else:
-            return 'Product not found or API error', 404
+        # Save the file to the uploads folder
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+        print(f"File saved to {filepath}")
+
+        try:
+            # Open the saved image file for reading
+            with open(filepath, 'rb') as image_file:
+                image = Image.open(image_file)
+                barcodes = decode(image)
+
+                # Ensure at least one barcode was found
+                if not barcodes:
+                    return jsonify({'message': 'No barcodes found'}), 404
+
+                barcode_number = barcodes[0].data.decode("utf-8")
+                print(f"Decoded barcode number: {barcode_number}")
+
+                # Query the OpenFoodFacts API with the decoded barcode
+                response = requests.get(f'https://world.openfoodfacts.org/api/v2/product/{barcode_number}')
+                if response.status_code == 200:
+                    product_data = response.json()
+                    return jsonify(product_data)
+                else:
+                    return jsonify({'message': 'Product not found or API error'}), response.status_code
+        except IOError:
+            return jsonify({'message': 'Error opening or reading image file'}), 500
+
 
 # if __name__ == "__main__":
 #     app.run(host="0.0.0.0", port=env.get("PORT", 3000))
