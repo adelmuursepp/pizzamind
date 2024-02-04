@@ -1,0 +1,66 @@
+.product-info-page {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100vh; /* Use the full screen height */
+  /* padding: 20px; */
+  box-sizing: border-box;
+  align-items: center;
+  width: 100vw;
+  background-color: #8bc8d4;
+}
+.product-info-box {
+  width: 100vw;
+  margin-bottom: 40px;
+}
+
+.product-info-box form {
+  margin: 10vh 5vw;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+}
+.product-info {
+  padding-top: 5vh;
+  /* height: 10vh; */
+  text-align: center;
+}
+
+.product-info-box h2 {
+  margin: 0;
+  font-size: 16px;
+  font-family: "Pacifico";
+  color: white;
+}
+
+.expiration-input {
+    margin-top: 15px;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Add some space between buttons */
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 24px;
+  background-color: #83d981;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+  .product-info h2 {
+    font-size: 16px;
+  }
+
+  .action-btn {
+    padding: 8px 16px;
+    font-size: 18px;
+  }
+}

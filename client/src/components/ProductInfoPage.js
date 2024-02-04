@@ -1,5 +1,10 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import './ProductInfo.css'
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import { useAuth0 } from '@auth0/auth0-react';
 import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -20,11 +25,54 @@ ChartJS.register(
     Legend
 );
 
+
 const ProductDetails = () => {
     const location = useLocation();
     const { product } = location.state;
+    const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+    const navigate = useNavigate();
 
+    const [startDate, setStartDate] = useState(new Date());
 
+    // const handleChange = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.name]: e.target.value,
+    //     });
+    // };
+
+    const handleSubmit = async (e) => {
+        console.log(isAuthenticated);
+        e.preventDefault();
+        const token = await getAccessTokenSilently();
+
+        const data = {
+            expirationDate: startDate,
+            userEmail: user.email,
+            nutriScore: product.nutriscore_grade,
+            productName: product.product_name
+        }
+
+        console.log(data);
+
+        const response = await fetch('http://127.0.0.1:5000/submit-form', { // Replace with your Flask API endpoint
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result); // Process your API response here
+            alert('Product saved successfully');
+            navigate('/dashboard');
+        } else {
+            alert('Failed to save the product');
+        }
+    };
 
     const chartData = {
         labels: ['Fat', 'Proteins', 'Carbohydrates'],
@@ -33,16 +81,16 @@ const ProductDetails = () => {
                 label: 'Nutritional Values (g per 100g)',
                 data: [product.nutriments.fat, product.nutriments.proteins, product.nutriments.carbohydrates],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                 ],
-                borderWidth: 1,
+                borderWidth: 2,
             },
         ],
     };
@@ -62,13 +110,39 @@ const ProductDetails = () => {
     };
 
     return (
-        <div>
+        <div className='product-info-page'>
+            <div className='product-info-box'>
+                <h2 className='product-info'>{product.product_name}</h2>
+                <form onSubmit={handleSubmit}>
+                    <p>Category: {product.categories}</p>
+                    <p>Nutritional score: {product.nutriscore_grade}</p>
+                    <p>Ecoscore: {product.ecoscore_grade}</p>
+                    <p>Serving size: {product.serving_size}</p>
+                    <div className='expiration-inpute'>
+                        <label htmlFor="expiration">Expiration date:</label>
+                        <DatePicker
+                            showIcon
+                            selected={startDate}
+                            // value={formData.expirationDate}
+                            onChange={(date) => setStartDate(date)}
+                        />
+                        {/* <input
 
-            <h1>{product.product_name}</h1>
-            <div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
-                <Bar data={chartData} options={options} />
+                            className='form-control date-picker'
+                            id="date"
+                            name="date"
+                            value={formData.expirationDate}
+                            onChange={handleChange}
+                        /> */}
+                    </div>
+                    <div style={{ width: '80vw', margin: '0' }}>
+                        <Bar data={chartData} options={options} />
+                    </div>
+                    <button type="submit">Save on the shelf</button>
+                </form>
             </div>
-        </div>
+
+        </div >
     );
 };
 

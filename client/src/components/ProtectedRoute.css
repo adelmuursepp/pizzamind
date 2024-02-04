@@ -5,8 +5,10 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .loading-page .loading-title {
+  margin: auto;
   font-size: 30px;
 }

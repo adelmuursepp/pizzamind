@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './components/WelcomePage';
 import { Auth0Provider } from '@auth0/auth0-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [message, setMessage] = useState('');
