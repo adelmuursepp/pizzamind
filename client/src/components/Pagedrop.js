@@ -1,6 +1,6 @@
 export const pageItemsData = [
     {
-        title: '=',
+        title: '≡',
         url: '/',
         submenu: [
             {

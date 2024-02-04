@@ -1,9 +1,10 @@
 import MenuItems from './MenuItems';
 import { pageItemsData } from './Pagedrop';
 
-const PageMenu = () => {
+const PageMenu = ({ rightAligned }) => {
+  const dropdownClass = rightAligned ? 'desktop-nav dropdown right-aligned' : 'desktop-nav dropdown';
   return (
-    <nav className="desktop-nav">
+      <nav className={dropdownClass}>
       <ul className="menus">
         {pageItemsData.map((menu, index) => {
           return <MenuItems items={menu} key={index} />;
