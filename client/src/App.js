@@ -41,6 +41,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
+    
   );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Dashboard.css'; // Import the CSS for styling
 import WebFont from 'webfontloader';
+import Header from './Header';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +26,10 @@ const Dashboard = () => {
             {isAuthenticated && (
                 <>
                     {/* <div className="dashboard"> */}
+                    
+                    <div>
+                    <Header />
+                    </div>
                     <div className="user-info">
                         <h2 className="h2-title">Dashboard</h2>
                         <p>{user.name}</p>
