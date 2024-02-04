@@ -78,7 +78,7 @@ const ProductDetails = () => {
         labels: ['Fat', 'Proteins', 'Carbohydrates'],
         datasets: [
             {
-                label: 'Nutritional Values (g per 100g)',
+                label: 'Nutritional Values (g per serving)',
                 data: [product.nutriments.fat, product.nutriments.proteins, product.nutriments.carbohydrates],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
