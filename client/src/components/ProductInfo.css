@@ -15,7 +15,7 @@
 }
 
 .product-info-box form {
-  margin: 10vh 5vw;
+  margin: 1vh 5vw;
   text-align: center;
   color: white;
   font-weight: 700;
@@ -28,13 +28,20 @@
 
 .product-info-box h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-family: "Pacifico";
   color: white;
 }
 
+.product-specs {
+  display: flex;
+  text-align: left;
+  justify-content: space-around;
+  gap: 10vw;
+  margin-bottom: 3vh;
+}
 .expiration-input {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 .actions {
   display: flex;
