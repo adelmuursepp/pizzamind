@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Camera from './Camera'
-
+import Camera from './Camera';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function FileUpload() {
     const navigate = useNavigate();
@@ -11,7 +11,9 @@ function FileUpload() {
         setSelectedFile(event.target.files[0]);
     };
 
-    const handleFileUpload = (e) => {
+    const { getAccessTokenSilently } = useAuth0();
+
+    const handleFileUpload = async (e) => {
         e.preventDefault();
         if (!selectedFile) {
             alert('Please select a file first!');
@@ -20,9 +22,13 @@ function FileUpload() {
 
         const formData = new FormData();
         formData.append('file', selectedFile, selectedFile.name);
+        const token = await getAccessTokenSilently();
 
         fetch('/upload', {
             method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             body: formData,
         })
             .then(response => response.json())
