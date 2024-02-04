@@ -7,7 +7,7 @@ const Header = () => {
       <div className="header-container">
         <UserMenu rightAligned={false}/>
         <a href="/" className="logo">
-          Logo
+          <h1>🍕</h1>
         </a>
         <PageMenu rightAligned={false}/>
       </div>
