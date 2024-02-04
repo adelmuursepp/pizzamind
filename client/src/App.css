@@ -319,3 +319,11 @@ header {
     padding-bottom: 100px; /* Adjust padding for smaller screens */
   }
 }
+
+.camera-container {
+  width: 50%; /* Adjust as needed */
+  margin: 0 auto; /* Centers the container horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
