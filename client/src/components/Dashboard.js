@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Dashboard.css'; // Import the CSS for styling
 import WebFont from 'webfontloader';
 import Header from './Header';
+import Footer from './Footer';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -83,6 +84,9 @@ const Dashboard = () => {
                     {/* <button onClick={() => logout({ returnTo: "/" })}>
                         Log Out
                     </button> */}
+                    <div>
+                    <Footer />
+                    </div>
                 </>
             )}
         </div>

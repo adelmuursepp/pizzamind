@@ -126,7 +126,7 @@ header {
 
 .desktop-nav .dropdown {
   position: absolute;
-  left: 0; /* Position the dropdowns from the left edge */
+  right: 0; /* Position the dropdowns from the left edge */
   box-shadow: 0 10px 15px -3px rgba(46, 41, 51, 0.08),
     0 4px 6px -2px rgba(71, 63, 79, 0.16);
   font-size: 0.875rem;
@@ -141,8 +141,8 @@ header {
 }
 
 .desktop-nav .dropdown.right-aligned {
-  left: auto;
-  right: 0; /* Position the right-aligned dropdowns from the right edge */
+  right: auto;
+  left: 0; /* Position the right-aligned dropdowns from the right edge */
 }
 
 .desktop-nav .dropdown.show {
@@ -288,4 +288,34 @@ header {
   text-decoration: none;
   color: black; /* Adjust color as needed */
   font-size: 24px; /* Adjust font size as needed */
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  padding-bottom: 80px; /* Adjust this value to match the height of your footer plus some extra space */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    height: 80px; /* Adjust height for smaller screens */
+  }
+  
+  .content-wrapper {
+    padding-bottom: 100px; /* Adjust padding for smaller screens */
+  }
 }

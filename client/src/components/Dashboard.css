@@ -5,6 +5,7 @@
   height: 100vh; /* Use the full screen height */
   /* padding: 20px; */
   box-sizing: border-box;
+  padding-bottom: 80px;
 }
 .user-info {
   padding-top: 5vh;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Camera from './Camera'
+import Header from './Header';
+import Footer from './Footer';
 
 
 function FileUpload() {
@@ -39,12 +41,14 @@ function FileUpload() {
 
     return (
         <div>
+            <Header />
             <h2>Upload a File</h2>
             < Camera />
             {/* <form onSubmit={handleFileUpload}>
                 <input type="file" onChange={handleFileChange} />
                 <button type="submit">Upload</button>
             </form> */}
+            <Footer />
         </div>
     );
 }
