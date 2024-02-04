@@ -160,13 +160,18 @@ def handle_form_submission():
     expiration_date = data.get('expirationDate')
     nutri_score = data.get('nutriScore')
     product_name = data.get('productName')
+    image_url = data.get('imageUrl')
+    calories = data.get('calories')
+    # 'image_url': image_url,
 
     if user_email and expiration_date:
         result = mongo.db.food_storage.insert_one({
             'user_email': user_email,
             'expiration_date': expiration_date,
             'nutriscore': nutri_score,
-            'product_name': product_name
+            'product_name': product_name,
+            'calories': calories,
+            'image': image_url
         })
         return jsonify({'message': 'Product saved successfully'})
     else:

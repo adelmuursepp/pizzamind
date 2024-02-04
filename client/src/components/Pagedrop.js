@@ -18,12 +18,16 @@ export const pageItemsData = [
         ]
       },
       {
+        title: 'Dashboard',
+        url: '/dashboard',
+      },
+      {
         title: 'What to Eat?',
         url: '/recommendations',
       },
       {
         title: 'My Fridge',
-        url: '/dashboard',
+        url: '/fridge',
       },
       {
         title: 'Food Reports',

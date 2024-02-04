@@ -50,7 +50,10 @@ const ProductDetails = () => {
             expirationDate: startDate,
             userEmail: user.email,
             nutriScore: product.nutriscore_grade,
-            productName: product.product_name
+            productName: product.product_name,
+            calories: product.nutriments.energy_value,
+            imageUrl: product.image_front_small_url
+
         }
 
         console.log(data);
