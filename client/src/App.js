@@ -5,7 +5,9 @@ import FileUpload from './components/FileUpload';
 import FileUploadNOCAM from './components/FileUploadNOCAM';
 import ProductInfoPage from './components/ProductInfoPage';
 import Dashboard from './components/Dashboard';
+import Fridge from './components/Fridge';
 import LogoutPage from './components/LogoutPage';
+import UserInfo from './components/UserInfo';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './components/WelcomePage';
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -39,6 +41,8 @@ function App() {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/fridge" element={<ProtectedRoute><Fridge /></ProtectedRoute>} />
+          <Route path="/account" element={<ProtectedRoute><UserInfo /></ProtectedRoute>} />
           <Route path="/logout" element={<ProtectedRoute><LogoutPage /></ProtectedRoute>} />
           <Route path="/takephoto" element={<ProtectedRoute><FileUpload /></ProtectedRoute>} />
           <Route path="/productinfo" element={<ProductInfoPage />} />

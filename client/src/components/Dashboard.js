@@ -89,8 +89,8 @@ const Dashboard = () => {
                         <Header />
                     </div>
                     <div className="user-info">
-                        <h2 className="h2-title">Dashboard</h2>
-                        <p>{user.name}</p>
+                        <h1 className="h1-title">Hello, {user.name}!</h1>
+                        <p></p>
                     </div>
                     <div className='soon-expiring'>
                         <ul className="list-group">

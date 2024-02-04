@@ -1,25 +1,21 @@
 export const pageItemsData = [
     {
         title: '≡',
-        url: '/',
+        url: 'dashboard',
         submenu: [
             {
               title: 'User',
-              url: '/',
+              url: '/dashboard',
               submenu: [
                 {
                     title: 'Account',
-                    url: '/',
+                    url: '/account',
                 },
                 {
                     title: 'Sign Out',
                     url: '/logout',
                 },
               ]
-            },
-            {
-              title: 'What to Eat?',
-              url: '/recommendations',
             },
             {
               title: 'My Fridge',
@@ -32,6 +28,10 @@ export const pageItemsData = [
             {
               title: 'Group Ordering',
               url: '/group',
+            },
+            {
+              title: 'Donate Food',
+              url: '/donate',
             },
             {
               title: 'Scan +',
