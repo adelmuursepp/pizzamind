@@ -3,7 +3,7 @@ from pyzbar.pyzbar import decode
 from PIL import Image
 import io
 import requests
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from flask_pymongo import PyMongo
@@ -31,7 +31,7 @@ if ENV_FILE:
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}, r"/submit-form": {"origins": "http://127.0.0.1:3000"}, r"/get-products": {"origins": "http://127.0.0.1:3000"}})
 app.config["MONGO_URI"] = "mongodb+srv://daniel:QHacker2024@pizzamind.bxk8emc.mongodb.net/pizzamind?retryWrites=true&w=majority"
 app.secret_key = env.get("APP_SECRET_KEY")
 mongo = PyMongo(app)
@@ -149,6 +149,42 @@ def file_upload():
         except IOError:
             return jsonify({'message': 'Error opening or reading image file'}), 500
 
+@token_required
+@app.route('/submit-form', methods=['POST'])
+def handle_form_submission():
+    print(request.data)
+    data = request.json
+    user_email = data.get('userEmail')
+    expiration_date = data.get('expirationDate')
+    nutri_score = data.get('nutriScore')
+    product_name = data.get('productName')
+
+    if user_email and expiration_date:
+        result = mongo.db.food_storage.insert_one({
+            'user_email': user_email,
+            'expiration_date': expiration_date,
+            'nutriscore': nutri_score,
+            'product_name': product_name
+        })
+        return jsonify({'message': 'Product saved successfully'})
+    else:
+        return jsonify({'message': 'Product not save. Check for missing data'})
+
+@token_required
+@app.route('/get-products', methods=['GET'])
+def get_products():
+    user_email = request.args.get('email')  # Get the email from query parameters
+    if not user_email:
+        return jsonify({'error': 'Missing email parameter'}), 400
+
+    products = mongo.db.food_storage.find({'user_email': user_email})
+    products_list = list(products)
+
+    # Convert ObjectId to string because it's not JSON serializable
+    for product in products_list:
+        product['_id'] = str(product['_id'])
+
+    return jsonify(products_list)
 
 # if __name__ == "__main__":
 #     app.run(host="0.0.0.0", port=env.get("PORT", 3000))

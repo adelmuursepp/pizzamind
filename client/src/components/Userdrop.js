@@ -1,6 +1,6 @@
 export const userDropData = [
     {
-      title: 'User',
+      title: '👤',
       url: '/',
       submenu: [
         {
