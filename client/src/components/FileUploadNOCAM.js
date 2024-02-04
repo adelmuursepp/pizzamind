@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-
+import './FileUploadNOCAM.css';
 
 function FileUpload() {
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function FileUpload() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                alert(`${data['product']}`);
+                alert('Successfully saved the file');
                 navigate('/productinfo', { state: { product: data.product } });
             })
             .catch(error => {
@@ -41,11 +41,13 @@ function FileUpload() {
     return (
         <div>
             <Header />
-            <h2>Upload a File</h2>
-            <form onSubmit={handleFileUpload}>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Upload</button>
-            </form>
+            <div className='upload-file-box'>
+                <h2>Upload a File</h2>
+                <form onSubmit={handleFileUpload}>
+                    <input type="file" onChange={handleFileChange} />
+                    <button className="action-btn-upload" type="submit">Upload</button>
+                </form>
+            </div>
             <Footer />
         </div>
     );

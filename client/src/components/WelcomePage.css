@@ -20,6 +20,7 @@
   text-align: center;
   color: white;
   font-family: "Pacifico";
+  margin-bottom: 20px;
 }
 
 .welcome-info .intro-sentence {
@@ -31,6 +32,7 @@
   display: flex;
   justify-content: center;
   gap: 10px; /* Add some space between buttons */
+  margin-bottom: 40px;
 }
 
 .action-btn {

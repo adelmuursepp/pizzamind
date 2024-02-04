@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import './Camera.css';
 
 
 const Camera = () => {
@@ -84,10 +85,10 @@ const Camera = () => {
             {error ? (
                 <div>Error: {error}</div>
             ) : (
-                <>
+                <div className="capture-box">
                     <video ref={videoRef} autoPlay playsInline style={{ width: '100%' }}></video>
-                    <button onClick={captureImage}>Capture Photo</button>
-                </>
+                    <button className="action-btn" onClick={captureImage}>Capture Photo</button>
+                </div>
             )}
         </div>
     );
