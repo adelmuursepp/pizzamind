@@ -19,6 +19,14 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
 
+    const formatDateToDDMMYYYY = (inputDate) => {
+        const date = new Date(inputDate);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is zero-based
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
     useEffect(() => {
         const fetchProducts = async () => {
 
@@ -100,7 +108,7 @@ const Dashboard = () => {
                                 <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 className="my-0">{product.product_name}</h6>
-                                        <small className="text-muted">Expiration Date: {product.expiration_date}</small>
+                                        <small className="text-muted">Expiration Date: {formatDateToDDMMYYYY(product.expiration_date)}</small>
                                     </div>
                                     <button className=" to-donate" onClick={() => handleSaveProduct(product)}>Mark for Donation</button>
                                 </li>
