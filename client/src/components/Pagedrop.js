@@ -1,15 +1,15 @@
 export const pageItemsData = [
   {
     title: '≡',
-    url: '/',
+    url: '/dashboard',
     submenu: [
       {
         title: 'User',
-        url: '/',
+        url: '/dashboard',
         submenu: [
           {
             title: 'Account',
-            url: '/',
+            url: '/account',
           },
           {
             title: 'Sign Out',
@@ -22,10 +22,6 @@ export const pageItemsData = [
         url: '/dashboard',
       },
       {
-        title: 'What to Eat?',
-        url: '/recommendations',
-      },
-      {
         title: 'My Fridge',
         url: '/fridge',
       },
@@ -34,7 +30,7 @@ export const pageItemsData = [
         url: '/reports',
       },
       {
-        title: 'Food for Donation',
+        title: 'Donate Food',
         url: '/products-to-donate',
       },
       {
