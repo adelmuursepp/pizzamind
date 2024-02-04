@@ -4,6 +4,20 @@ export const pageItemsData = [
         url: '/',
         submenu: [
             {
+              title: 'User',
+              url: '/',
+              submenu: [
+                {
+                    title: 'Account',
+                    url: '/',
+                },
+                {
+                    title: 'Sign Out',
+                    url: '/',
+                },
+              ]
+            },
+            {
               title: 'What to Eat?',
               url: '/recommendations',
             },
