@@ -57,3 +57,7 @@
     font-size: 18px;
   }
 }
+
+.spacer {
+  height: 200px; /* Adjust the height as needed */
+}

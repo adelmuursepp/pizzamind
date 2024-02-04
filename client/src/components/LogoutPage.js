@@ -3,6 +3,7 @@ import './WelcomePage.css'; // Import the CSS for styling
 import WebFont from 'webfontloader';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
+import Footer from './Footer';
 
 WebFont.load({
     google: {
@@ -25,7 +26,11 @@ const LogoutPage = () => {
                     <button className="action-btn" onClick={() => navigate("/dashboard")}>No, go back</button>
                     <button className="action-btn" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Yes, log me out</button>
                 </div>
+                <div className="spacer"></div>
             </div>
+        <div>
+            <Footer />
+        </div>
         </div>
     );
 };

@@ -19,7 +19,7 @@ export const pageItemsData = [
       },
       {
         title: 'My Fridge',
-        url: '/dashboard',
+        url: '/fridge',
       },
       {
         title: 'Food Reports',
