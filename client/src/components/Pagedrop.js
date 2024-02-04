@@ -13,7 +13,7 @@ export const pageItemsData = [
                 },
                 {
                     title: 'Sign Out',
-                    url: '/',
+                    url: '/logout',
                 },
               ]
             },

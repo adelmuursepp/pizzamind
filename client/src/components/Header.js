@@ -5,11 +5,9 @@ const Header = () => {
   return (
     <header>
       <div className="header-container">
-        <UserMenu rightAligned={false}/>
-        <a href="/" className="logo">
-          <h1>🍕</h1>
-        </a>
         <PageMenu rightAligned={false}/>
+          <h2 className="h2-title">PizzaMind</h2>
+        <UserMenu rightAligned={false}/>
       </div>
     </header>
   );
