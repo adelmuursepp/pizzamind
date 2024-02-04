@@ -32,7 +32,7 @@ if ENV_FILE:
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:3000"}, r"/submit-form": {"origins": "http://127.0.0.1:3000"},
- r"/get-products": {"origins": "http://127.0.0.1:3000"}, r"/products-to-donate": {"origins": "http://127.0.0.1:3000"},
+ r"/get-products": {"origins": "http://127.0.0.1:3000"}, r"/get-products-to-donate": {"origins": "http://127.0.0.1:3000"},
  r"/save-product": {"origins": "http://127.0.0.1:3000"}})
 app.config["MONGO_URI"] = "mongodb+srv://daniel:QHacker2024@pizzamind.bxk8emc.mongodb.net/pizzamind?retryWrites=true&w=majority"
 app.secret_key = env.get("APP_SECRET_KEY")
