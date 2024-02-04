@@ -42,12 +42,9 @@ function App() {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-<<<<<<< HEAD
           <Route path="/fridge" element={<ProtectedRoute><Fridge /></ProtectedRoute>} />
           <Route path="/account" element={<ProtectedRoute><UserInfo /></ProtectedRoute>} />
-=======
           <Route path="/products-to-donate" element={<ProtectedRoute><FoodToDonate /></ProtectedRoute>} />
->>>>>>> d2b4ae152b44e0f0ba5bde5fee95c25e51421e11
           <Route path="/logout" element={<ProtectedRoute><LogoutPage /></ProtectedRoute>} />
           <Route path="/takephoto" element={<ProtectedRoute><FileUpload /></ProtectedRoute>} />
           <Route path="/productinfo" element={<ProductInfoPage />} />
