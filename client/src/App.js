@@ -5,6 +5,7 @@ import FileUpload from './components/FileUpload';
 import FileUploadNOCAM from './components/FileUploadNOCAM';
 import ProductInfoPage from './components/ProductInfoPage';
 import Dashboard from './components/Dashboard';
+import LogoutPage from './components/LogoutPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './components/WelcomePage';
 import FoodToDonate from './components/FoodToDonate';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/products-to-donate" element={<ProtectedRoute><FoodToDonate /></ProtectedRoute>} />
+          <Route path="/logout" element={<ProtectedRoute><LogoutPage /></ProtectedRoute>} />
           <Route path="/takephoto" element={<ProtectedRoute><FileUpload /></ProtectedRoute>} />
           <Route path="/productinfo" element={<ProductInfoPage />} />
           <Route path="/upload" element={<FileUploadNOCAM />} />

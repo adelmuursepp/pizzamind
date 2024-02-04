@@ -2,7 +2,7 @@ import Dropdown from './Dropdown';
 import { useState, useEffect, useRef } from "react";
 
 
-const MenuItems = ({ items }) => {
+const MenuItems = ({ items, depthLevel }) => {
     let ref = useRef();
     const [dropdown, setDropdown] = useState(false);
     useEffect(() => {
@@ -27,8 +27,9 @@ const MenuItems = ({ items }) => {
                 aria-expanded={dropdown ? "true" : "false"}
                 onClick={() => setDropdown((prev) => !prev)}>
                 {items.title}{' '}
+                {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
             </button>
-            <Dropdown submenus={items.submenu} dropdown={dropdown} />
+            <Dropdown depthLevel={depthLevel} submenus={items.submenu} dropdown={dropdown} />
             </>
         ) : (
             <a href={items.url}>{items.title}</a>
