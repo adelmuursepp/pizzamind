@@ -6,6 +6,7 @@
   /* padding: 20px; */
   box-sizing: border-box;
   justify-content: center;
+  padding-bottom: 80px;
 }
 .user-info {
   padding-top: 5vh;

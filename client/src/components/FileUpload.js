@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Camera from './Camera';
 import { useAuth0 } from '@auth0/auth0-react';
+import Camera from './Camera'
+import Header from './Header';
+import Footer from './Footer';
+
 
 function FileUpload() {
     const navigate = useNavigate();
@@ -45,12 +48,14 @@ function FileUpload() {
 
     return (
         <div>
+            <Header />
             <h2>Upload a File</h2>
             < Camera />
             {/* <form onSubmit={handleFileUpload}>
                 <input type="file" onChange={handleFileChange} />
                 <button type="submit">Upload</button>
             </form> */}
+            <Footer />
         </div>
     );
 }
