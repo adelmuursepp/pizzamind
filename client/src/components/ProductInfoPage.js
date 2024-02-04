@@ -115,9 +115,18 @@ const ProductDetails = () => {
                 <h2 className='product-info'>{product.product_name}</h2>
                 <form onSubmit={handleSubmit}>
                     <p>Category: {product.categories}</p>
-                    <p>Nutritional score: {product.nutriscore_grade}</p>
-                    <p>Ecoscore: {product.ecoscore_grade}</p>
-                    <p>Serving size: {product.serving_size}</p>
+                    <div className="product-specs">
+                        <div>
+                            <p>Nutritional score: {product.nutriscore_grade}</p>
+                            <p>Ecoscore: {product.ecoscore_grade}</p>
+                            <p>Serving size: {product.serving_size}</p>
+                        </div>
+                        <div>
+                            <p>Fat amount: {product.nutrient_levels.fat}</p>
+                            <p>Salt amount: {product.nutrient_levels.salt}</p>
+                            <p>Sugar amount: {product.nutrient_levels.sugars}</p>
+                        </div>
+                    </div>
                     <div className='expiration-inpute'>
                         <label htmlFor="expiration">Expiration date:</label>
                         <DatePicker
@@ -135,10 +144,10 @@ const ProductDetails = () => {
                             onChange={handleChange}
                         /> */}
                     </div>
-                    <div style={{ width: '80vw', margin: '0' }}>
+                    <div style={{ width: '80vw', margin: '0', marginTop: '5vh', marginBottom: '3vh' }}>
                         <Bar data={chartData} options={options} />
                     </div>
-                    <button type="submit">Save on the shelf</button>
+                    <button className="action-btn" type="submit">Save on the shelf</button>
                 </form>
             </div>
 

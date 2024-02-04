@@ -16,8 +16,8 @@ const WelcomePage = () => {
         <div className="welcomepage">
             <div className='welcome-box'>
                 <div className="welcome-info">
-                    <h2 className="h2-title">PizzaMind</h2>
-                    <p className='intro-sentence'>Healthy and sustainable food options</p>
+                    <h2 className="h2-title"> 🍕 PizzaMind </h2>
+                    <p className='intro-sentence'>Stay healthy, save money, and have some pizza mind </p>
                 </div>
                 <div className="actions">
                     <button className="action-btn" onClick={() => navigate("/dashboard")}>Log In / Sign Up</button>

@@ -7,6 +7,7 @@ import ProductInfoPage from './components/ProductInfoPage';
 import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './components/WelcomePage';
+import FoodToDonate from './components/FoodToDonate';
 import { Auth0Provider } from '@auth0/auth0-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -38,13 +39,14 @@ function App() {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/products-to-donate" element={<ProtectedRoute><FoodToDonate /></ProtectedRoute>} />
           <Route path="/takephoto" element={<ProtectedRoute><FileUpload /></ProtectedRoute>} />
           <Route path="/productinfo" element={<ProductInfoPage />} />
           <Route path="/upload" element={<FileUploadNOCAM />} />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
-    
+
   );
 }
 
