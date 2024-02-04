@@ -3,6 +3,13 @@ import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Navigate } from 'react-router-dom';
 import './ProtectedRoute.css';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+    google: {
+        families: ['Pacifico:400']
+    }
+});
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();

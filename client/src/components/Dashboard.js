@@ -3,6 +3,7 @@ import './Dashboard.css'; // Import the CSS for styling
 import WebFont from 'webfontloader';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import Map from './Map'
 
 WebFont.load({
     google: {
@@ -18,6 +19,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
+
             if (isAuthenticated && user?.email) {
                 try {
                     const token = await getAccessTokenSilently();
@@ -43,6 +45,32 @@ const Dashboard = () => {
         fetchProducts();
     }, [isAuthenticated, user?.email, getAccessTokenSilently]);
 
+    const handleSaveProduct = async (product) => {
+        if (isAuthenticated && user?.email) {
+            try {
+                const token = await getAccessTokenSilently();
+                const response = await fetch('http://127.0.0.1:5000/save-product', {
+                    method: 'POST',
+                    // mode: 'no-cors',
+                    body: JSON.stringify(product),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Product saved:', data);
+                    alert('Product saved successfully!');
+                } else {
+                    console.error('Failed to save product');
+                    alert('Failed to save product');
+                }
+            } catch (error) {
+                console.error('Error saving product:', error);
+                alert('Error saving product');
+            }
+        }
+    };
 
     return (
         <div className="dashboard">
@@ -52,24 +80,30 @@ const Dashboard = () => {
                 </button>
             )}
             {isAuthenticated && (
-                <>
-                    {/* <div className="dashboard"> */}
+
+                <div className="dashboard">
                     <div className="user-info">
                         <h2 className="h2-title">Dashboard</h2>
                         <p>{user.name}</p>
                     </div>
                     <div className='soon-expiring'>
-                        {products.map((product, index) => (
-                            <div key={index}>
-                                <h3>{product.name}</h3> {/* Adjust according to your product structure */}
-                                <p></p>
-                                <p>Expiration Date: {product.expiration_date}</p> {/* Example field */}
-                            </div>
-                        ))}
-                    </div>
-                    <div className='data-visualization'>
+                        <ul className="list-group">
+                            {products.map((product, index) => (
 
+                                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 className="my-0">{product.product_name}</h6>
+                                        <small className="text-muted">Expiration Date: {product.expiration_date}</small>
+                                    </div>
+                                    <button className=" to-donate" onClick={() => handleSaveProduct(product)}>Mark for Donation</button>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
+                    <Map />
+                    {/* <div className='data-visualization'>
+
+                    </div> */}
                     <div className="actions">
                         <button className="action-btn" onClick={() => navigate("/takephoto")}>Scan</button>
                         <button className="action-btn" onClick={() => navigate("/upload")}>Upload Photo</button>
@@ -78,7 +112,7 @@ const Dashboard = () => {
                     {/* <button onClick={() => logout({ returnTo: "/" })}>
                         Log Out
                     </button> */}
-                </>
+                </div>
             )}
         </div>
     );

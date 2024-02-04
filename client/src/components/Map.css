@@ -1,0 +1,32 @@
+.map-box {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  margin-bottom: 5vh;
+}
+
+.map-box h2 {
+  font-size: 20px;
+}
+
+.map-container {
+  height: 30vh;
+  width: 80vw;
+  /* margin: auto; */
+}
+
+.sidebar {
+  background-color: rgb(35 55 75 / 90%);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}

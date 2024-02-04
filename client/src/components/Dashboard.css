@@ -5,6 +5,7 @@
   height: 100vh; /* Use the full screen height */
   /* padding: 20px; */
   box-sizing: border-box;
+  justify-content: center;
 }
 .user-info {
   padding-top: 5vh;
@@ -15,6 +16,7 @@
 .soon-expiring {
   background-color: #8bc8d4;
   height: 30vh;
+  color: white;
 }
 
 .data-visualization {
@@ -32,6 +34,17 @@
   display: flex;
   justify-content: center;
   gap: 10px; /* Add some space between buttons */
+}
+
+.to-donate {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 12px;
+  background-color: #83d981;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .action-btn {

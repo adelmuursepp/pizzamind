@@ -31,7 +31,8 @@ if ENV_FILE:
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}, r"/submit-form": {"origins": "http://127.0.0.1:3000"}, r"/get-products": {"origins": "http://127.0.0.1:3000"}})
+CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:3000"}, r"/submit-form": {"origins": "http://127.0.0.1:3000"},
+ r"/get-products": {"origins": "http://127.0.0.1:3000"}, r"/save-product": {"origins": "http://127.0.0.1:3000"}})
 app.config["MONGO_URI"] = "mongodb+srv://daniel:QHacker2024@pizzamind.bxk8emc.mongodb.net/pizzamind?retryWrites=true&w=majority"
 app.secret_key = env.get("APP_SECRET_KEY")
 mongo = PyMongo(app)
@@ -169,6 +170,14 @@ def handle_form_submission():
         return jsonify({'message': 'Product saved successfully'})
     else:
         return jsonify({'message': 'Product not save. Check for missing data'})
+
+# @token_required
+# @cross_origin()
+@app.route('/save-product', methods=['POST'])
+def save_product():
+    product_data = request.json
+    result = mongo.db.products.insert_one(product_data)
+    return jsonify({'message': 'Product saved successfully', 'id': str(result.inserted_id)}), 200
 
 @token_required
 @app.route('/get-products', methods=['GET'])

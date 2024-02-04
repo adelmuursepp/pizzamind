@@ -9,6 +9,8 @@
 }
 
 .loading-page .loading-title {
-  margin: auto;
+  padding-top: 30vh;
+  color: white;
   font-size: 30px;
+  font-family: "Pacifico";
 }
